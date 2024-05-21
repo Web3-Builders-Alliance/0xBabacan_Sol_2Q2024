@@ -17,29 +17,35 @@ umi.use(signerIdentity(signer));
         // Follow this JSON structure
         // https://docs.metaplex.com/programs/token-metadata/changelog/v1.0#json-structure
 
-        // const image = ???
-        // const metadata = {
-        //     name: "?",
-        //     symbol: "?",
-        //     description: "?",
-        //     image: "?",
-        //     attributes: [
-        //         {trait_type: '?', value: '?'}
-        //     ],
-        //     properties: {
-        //         files: [
-        //             {
-        //                 type: "image/png",
-        //                 uri: "?"
-        //             },
-        //         ]
-        //     },
-        //     creators: []
-        // };
-        // const myUri = ???
-        // console.log("Your image URI: ", myUri);
+        const image = "https://arweave.net/HO4H544DqkLvV7RyW9ewIdRdDZ9MetUYa1wq6UHmUwE"     // Comes from the output of nft_image.ts
+        const metadata = {
+            name: "Rugy Balboa",
+            symbol: "PAIN",
+            description: "Yes pain, yes gain",
+            image: image,
+            attributes: [{
+                training_mode: 'eveready',
+                rarity: 'one and only',
+                hard: 'harder',
+                size: 'big enough'
+            }],
+            properties: {
+                files: [
+                    {
+                        type: "image/png",
+                        uri: image
+                    },
+                ]
+            },
+            creators: []
+        };
+        // Dress up the uri, load it with the metadata
+        const myUri = await umi.uploader.uploadJson(metadata);
+        console.log("Your stuffed image URI: ", myUri);
     }
     catch(error) {
         console.log("Oops.. Something went wrong", error);
     }
 })();
+
+// Your stuffed image URI:  https://arweave.net/lG6U90ilqfXtH0OraH-s-fgfugq2odd_ApUoHeqnZYI
